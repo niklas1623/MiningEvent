@@ -59,7 +59,7 @@ public class ScoreBoardCommand implements CommandExecutor {
 		Bukkit.getScheduler().runTaskAsynchronously(Main.getInstace(), new Runnable() {
 			public void run() {
 				int place = 0;
-				for (Pair<String, Integer> top : list) {
+				for (Pair<String, Integer> top : list) { 
 					place = place + 1; 
 					Score score = obj.getScore("§7" + place + ". §r" + top.getFirst());
 					score.setScore(top.getSecond());
