@@ -22,7 +22,7 @@ public class MySQL {
 		if (!isConnected()) {
 			try {
 				con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username,
-						password);
+						password+"?autoReconnect=true&useSSL=false");
 				Bukkit.getConsoleSender().sendMessage(Main.getInstace().prefix + " MySQL Verbindung §aaufgebaut§7!");
 			} catch (SQLException ex) {
 				ex.printStackTrace();
@@ -51,7 +51,7 @@ public class MySQL {
 		if (isConnected()) {
 			try {
 				con.createStatement().executeUpdate(
-						"CREATE TABLE IF NOT EXISTS player (PlayerID INT NOT NULL AUTO_INCREMENT , PlayerName TEXT NOT NULL , UUID TEXT NOT NULL , PRIMARY KEY (PlayerID), UNIQUE (UUID))");
+						"CREATE TABLE IF NOT EXISTS player (PlayerID INT NOT NULL AUTO_INCREMENT , PlayerName TEXT NOT NULL , UUID VARCHAR(100) NOT NULL , PRIMARY KEY (PlayerID), UNIQUE (UUID))");
 				con.createStatement().executeUpdate(
 						"CREATE TABLE IF NOT EXISTS punkte ( PlayerID INT NOT NULL , Punkte INT NOT NULL, PRIMARY KEY (PlayerID))");
 				con.createStatement().executeUpdate(

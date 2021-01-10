@@ -26,18 +26,20 @@ public class BlockPlace implements Listener {
 
 			@Override
 			public void run() {
-				if (ConfigManager.getConfigFileConfiguration().getString("Settings.Ore." + block) == null) {
-					return;
-				} else {
-					if (MiningEventManager.getOreID(block) == -1) {
-						MiningEventManager.setOreID(block);
-						MiningEventManager.placedBlock(MiningEventManager.getOreID(block), location);
+				if (!(ConfigManager.getEventState() == false)) {
+					if (ConfigManager.getConfigFileConfiguration().getString("Settings.Ore." + block) == null) {
+						return;
 					} else {
-						int OreID = MiningEventManager.getOreID(block);
-						MiningEventManager.placedBlock(OreID, location);
-					}
+						if (MiningEventManager.getOreID(block) == 0) {
+							MiningEventManager.setOreID(block);
+							MiningEventManager.placedBlock(MiningEventManager.getOreID(block), location);
+						} else {
+							int OreID = MiningEventManager.getOreID(block);
+							MiningEventManager.placedBlock(OreID, location);
+						}
 
-				}
+					}
+				}return;
 
 			}
 

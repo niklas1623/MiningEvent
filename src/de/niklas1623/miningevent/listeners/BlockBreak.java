@@ -34,32 +34,35 @@ public class BlockBreak implements Listener {
 
 			@Override
 			public void run() {
-
-				if (ConfigManager.getConfigFileConfiguration().getString("Settings.Ore." + block) == null) {
-					return;
-				} else {
-					if (MiningEventManager.getOreID(block) == -1) {
-						MiningEventManager.setOreID(block);
-						if (MiningEventManager.checkPlacedBlock(MiningEventManager.getOreID(block), location) == true) {
-							return;
-						} else {
-							int PlayerID = MiningEventManager.getPlayerID(uuid);
-							int OreID = MiningEventManager.getOreID(block);
-							MiningEventManager.setOreAmount(PlayerID, OreID, 1);
-							MiningEventManager.setPunkte(PlayerID, ConfigManager.getBlockPunkte(block), block);
-						}
+				if (!(ConfigManager.getEventState() == false)) {
+					if (ConfigManager.getConfigFileConfiguration().getString("Settings.Ore." + block) == null) {
+						return;
 					} else {
-						int OreID = MiningEventManager.getOreID(block);
-						if (MiningEventManager.checkPlacedBlock(OreID, location) == true) {
-							return;
+						if (MiningEventManager.getOreID(block) == 0) {
+							MiningEventManager.setOreID(block);
+							if (MiningEventManager.checkPlacedBlock(MiningEventManager.getOreID(block),
+									location) == true) {
+								return;
+							} else {
+								int PlayerID = MiningEventManager.getPlayerID(uuid);
+								int OreID = MiningEventManager.getOreID(block);
+								MiningEventManager.setOreAmount(PlayerID, OreID, 1);
+								MiningEventManager.setPunkte(PlayerID, ConfigManager.getBlockPunkte(block), block);
+							}
 						} else {
-							int PlayerID = MiningEventManager.getPlayerID(uuid);
-							MiningEventManager.setOreAmount(PlayerID, OreID, 1);
-							MiningEventManager.setPunkte(PlayerID, ConfigManager.getBlockPunkte(block), block);
+							int OreID = MiningEventManager.getOreID(block);
+							if (MiningEventManager.checkPlacedBlock(OreID, location) == true) {
+								return;
+							} else {
+								int PlayerID = MiningEventManager.getPlayerID(uuid);
+								MiningEventManager.setOreAmount(PlayerID, OreID, 1);
+								MiningEventManager.setPunkte(PlayerID, ConfigManager.getBlockPunkte(block), block);
+							}
 						}
-					}
 
+					}
 				}
+				return;
 
 			}
 		});

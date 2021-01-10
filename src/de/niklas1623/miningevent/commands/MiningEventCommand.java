@@ -6,9 +6,9 @@ import org.bukkit.command.CommandSender;
 
 import de.niklas1623.miningevent.Main;
 import de.niklas1623.miningevent.util.ConfigManager;
+import de.niklas1623.miningevent.util.MiningEventManager;
 
 public class MiningEventCommand implements CommandExecutor {
-	
 
 	public MiningEventCommand(Main main) {
 	}
@@ -17,13 +17,11 @@ public class MiningEventCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("miningevent")) {
 			if (sender.hasPermission("miningevent.reload") || sender.hasPermission("miningevent.*")) {
-				if (!(args.length == 1)) {
-					sender.sendMessage(Main.getInstace().prefix + " §7Nutze /miningevent reload/start/stop");
-				} else {
+				if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("reload")) {
 						Main.getInstace().reloadConfig();
 						ConfigManager.readConfig();
-						sender.sendMessage(Main.getInstace().prefix + " §7Die Config wurde neugeladen!");
+						sender.sendMessage(Main.getInstace().prefix + " §7Die Config wurde §aneugeladen!");
 					} else {
 						if (args[0].equalsIgnoreCase("start")) {
 							if (ConfigManager.getEventState() == true) {
@@ -47,12 +45,43 @@ public class MiningEventCommand implements CommandExecutor {
 									sender.sendMessage(Main.getInstace().prefix + " §7Das Event wurde §cgestoppt§7!");
 								}
 							} else {
-								sender.sendMessage(
-										Main.getInstace().prefix + " §7Nutze /miningevent reload/start/stop");
+								if (args[0].equalsIgnoreCase("clear")) {
+									sender.sendMessage(
+											Main.getInstace().prefix + " §7Nutze /miningevent clear punkte/orescount");
+								} else {
+									sender.sendMessage(
+											Main.getInstace().prefix + " §7Nutze /miningevent reload/start/stop");
+								}
 							}
 						}
 					}
+				} else {
+					if (args.length == 2) {
+						if (args[0].equalsIgnoreCase("clear")) {
+							if (args[1].equals("punkte")) {
+								MiningEventManager.clearDataBase(args[1].toString().toLowerCase());
+								sender.sendMessage(Main.getInstace().prefix + " §7Du hast erfolgreich die Tabelle §e"
+										+ args[1].toString() + " §7geleert!");
+							} else {
+								if (args[1].equals("orescount")) {
+									MiningEventManager.clearDataBase(args[1].toString().toLowerCase());
+									sender.sendMessage(
+											Main.getInstace().prefix + " §7Du hast erfolgreich die Tabelle §e"
+													+ args[1].toString() + " §7geleert!");
+								} else {
+									sender.sendMessage(
+											Main.getInstace().prefix + " §7Nutze /miningevent clear punkte/orescount");
+								}
+
+							}
+
+						}
+					} else {
+						sender.sendMessage(Main.getInstace().prefix + " §7Nutze /miningevent clear punkte/orescount");
+						sender.sendMessage(Main.getInstace().prefix + " §7Nutze /miningevent reload/start/stop");
+					}
 				}
+
 			} else {
 				sender.sendMessage(Main.getInstace().prefix + " §cDazu hast du keine Rechte!");
 			}
@@ -61,4 +90,4 @@ public class MiningEventCommand implements CommandExecutor {
 		return false;
 	}
 
-}	
+}
