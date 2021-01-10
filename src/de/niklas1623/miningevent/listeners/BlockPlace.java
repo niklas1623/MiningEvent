@@ -29,17 +29,17 @@ public class BlockPlace implements Listener {
 				if (!(ConfigManager.getEventState() == false)) {
 					if (ConfigManager.getConfigFileConfiguration().getString("Settings.Ore." + block) == null) {
 						return;
-					} else {
-						if (MiningEventManager.getOreID(block) == 0) {
-							MiningEventManager.setOreID(block);
-							MiningEventManager.placedBlock(MiningEventManager.getOreID(block), location);
-						} else {
-							int OreID = MiningEventManager.getOreID(block);
-							MiningEventManager.placedBlock(OreID, location);
-						}
-
 					}
-				}return;
+					if (MiningEventManager.getOreID(block) == 0) {
+						MiningEventManager.setOreID(block);
+						MiningEventManager.placedBlock(MiningEventManager.getOreID(block), location);
+					} else {
+						int OreID = MiningEventManager.getOreID(block);
+						MiningEventManager.placedBlock(OreID, location);
+					}
+
+				}
+				return;
 
 			}
 

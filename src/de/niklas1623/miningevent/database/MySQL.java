@@ -21,8 +21,9 @@ public class MySQL {
 	public static void connect() {
 		if (!isConnected()) {
 			try {
-				con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username,
-						password+"?autoReconnect=true&useSSL=false");
+				con = DriverManager.getConnection(
+						"jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true&useSSL=false",
+						username, password);
 				Bukkit.getConsoleSender().sendMessage(Main.getInstace().prefix + " MySQL Verbindung §aaufgebaut§7!");
 			} catch (SQLException ex) {
 				ex.printStackTrace();
@@ -59,7 +60,7 @@ public class MySQL {
 				con.createStatement().executeUpdate(
 						"CREATE TABLE IF NOT EXISTS placedblock ( OreID INT NOT NULL , Location TEXT NOT NULL )");
 				con.createStatement().executeUpdate(
-						"CREATE TABLE IF NOT EXISTS ores ( OreID INT NOT NULL AUTO_INCREMENT , Material TEXT NOT NULL , PRIMARY KEY (OreID))");
+						"CREATE TABLE IF NOT EXISTS ores ( OreID INT NOT NULL AUTO_INCREMENT , Material VARCHAR(255) NOT NULL , PRIMARY KEY (OreID), UNIQUE (Material))");
 
 			} catch (SQLException e) {
 				e.printStackTrace();

@@ -20,7 +20,7 @@ public class MiningEventManager {
 			ps_insertPlayer.setString(2, uuid);
 			ps_insertPlayer.setString(3, playername);
 
-			ps_insertPlayer.execute();
+			ps_insertPlayer.executeUpdate();
 			ps_insertPlayer.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -64,11 +64,11 @@ public class MiningEventManager {
 	}
 
 	public static void setOreID(String mat) {
-		String setOreID = "INSERT INTO ores SET Material = ?";
+		String setOreID = "INSERT INTO ores (Material) VALUES (?)";
 		try {
 			PreparedStatement ps = MySQL.con.prepareStatement(setOreID);
 			ps.setString(1, mat);
-			ps.execute();
+			ps.executeUpdate();
 
 			ps.close();
 		} catch (SQLException e) {
@@ -85,7 +85,7 @@ public class MiningEventManager {
 			ps.setInt(2, OreID);
 			ps.setInt(3, amount);
 
-			ps.execute();
+			ps.executeUpdate();
 			ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -99,7 +99,7 @@ public class MiningEventManager {
 			PreparedStatement ps = MySQL.con.prepareStatement(placedBlock);
 			ps.setInt(1, OreID);
 			ps.setString(2, Location);
-			ps.execute();
+			ps.executeUpdate();
 			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -127,12 +127,12 @@ public class MiningEventManager {
 
 	public static void setPunkte(int PlayerID, int Punkte, String mat) {
 		String setPunkte = "INSERT INTO punkte (PlayerID, Punkte) VALUES (?, ?) ON DUPLICATE KEY UPDATE Punkte=Punkte+"
-				+ ConfigManager.getBlockPunkte(mat);
+				+ Punkte;
 		try {
 			PreparedStatement ps = MySQL.con.prepareStatement(setPunkte);
 			ps.setInt(1, PlayerID);
 			ps.setInt(2, Punkte);
-			ps.execute();
+			ps.executeUpdate();
 			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

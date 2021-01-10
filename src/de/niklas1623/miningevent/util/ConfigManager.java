@@ -11,6 +11,8 @@ import de.niklas1623.miningevent.Main;
 import de.niklas1623.miningevent.database.MySQL;
 
 public class ConfigManager {
+	public static FileConfiguration YamlConfig;
+	public static FileConfiguration YamlEventState;
 
 	public static File getConfigFile() {
 		return new File("plugins/MiningEvent", "config.yml");
@@ -30,6 +32,8 @@ public class ConfigManager {
 	}
 
 	public static void readConfig() {
+		YamlConfig = getConfigFileConfiguration();
+		YamlEventState = getStateFileConfiguration();
 		FileConfiguration cfg = getConfigFileConfiguration();
 		Main.getInstace().prefix = ChatColor.translateAlternateColorCodes('&', cfg.getString("Prefix") + "§r");
 		Main.getInstace().playerpoints = ChatColor.translateAlternateColorCodes('&',
@@ -46,8 +50,7 @@ public class ConfigManager {
 	}
 
 	public static void readStateConfig() {
-		FileConfiguration cfg = getStateFileConfiguration();
-		Main.getInstace().eventState = cfg.getBoolean("Started");
+		Main.getInstace().eventState = YamlEventState.getBoolean("Started");
 	}
 	
 	public static void setDefaultStateConfig() {
@@ -63,8 +66,7 @@ public class ConfigManager {
 	}
 
 	public static int getBlockPunkte(String mat) {
-		FileConfiguration cfg = getConfigFileConfiguration();
-		return cfg.getInt("Settings.Ore." + mat);
+		return YamlConfig.getInt("Settings.Ore." + mat);
 	}
 
 	public static void setEventState(Boolean state) {
@@ -79,8 +81,7 @@ public class ConfigManager {
 	}
 
 	public static Boolean getEventState() {
-		FileConfiguration getState = getStateFileConfiguration();
-		return getState.getBoolean("Started");
+		return YamlEventState.getBoolean("Started");
 	}
 
 }
