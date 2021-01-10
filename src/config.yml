@@ -1,0 +1,40 @@
+#   ---Plugin by niklas1623---
+#
+#   Copyright © 2021 niklas1623. Alle Rechte vorbehalten.
+#
+#	%PREFIX% ist das Plugin Prefix
+#	%PLAYER% Spielername
+#   %PLACE% Platz in der Top X Liste
+#
+#
+
+Prefix: '&b&l[&e&lMiningEvent&b&l]'
+
+
+#Um dieses Plugin verwenden zu können brauchst du eine MySQL Datenbank!
+
+Database:
+    username: username
+    password: password
+    database: miningevent
+    host: localhost
+    port: '3306'
+
+
+Settings:
+    Messages:
+        PlayerPoints: "%PREFIX% &e%PLAYER% &7hat &e%PUNKTE% &7Punkte!"
+        TopPlayerMessage: "%PREFIX% &f%PLACE%. &e%PLAYER% &7hat &e%PUNKTE% &7Punkte!"
+    MaxTopPlayer: 15
+    # Beispiele!
+    Ore:
+        DIAMOND_ORE: 10
+        EMERALD_ORE: 15
+        LAPIS_ORE: 8
+        GOLD_ORE: 6
+        IRON_ORE: 2
+        COAL_ORE: 1
+        REDSTONE_ORE: 3
+        ANCIENT_DEBRIS: 20
+        NETHER_GOLD_ORE: 2
+        QUARTZ_ORE: 3

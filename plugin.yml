@@ -1,0 +1,13 @@
+name: MiningEvent
+main: de.niklas1623.miningevent.Main
+version: 1.0
+author: niklas1623
+api-version: 1.16
+description: MiningEvent by niklas1623
+
+
+commands:
+  punkte:
+  miningtop:
+  miningevent:
+  mininglist:
