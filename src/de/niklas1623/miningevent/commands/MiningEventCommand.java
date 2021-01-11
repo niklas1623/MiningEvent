@@ -16,7 +16,7 @@ public class MiningEventCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("miningevent")) {
-			if (sender.hasPermission("miningevent.reload") || sender.hasPermission("miningevent.*")) {
+			if (sender.hasPermission("miningevent.admin") || sender.hasPermission("miningevent.*")) {
 				if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("reload")) {
 						Main.getInstace().reloadConfig();
