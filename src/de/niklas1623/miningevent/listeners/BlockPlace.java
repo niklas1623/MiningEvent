@@ -27,7 +27,7 @@ public class BlockPlace implements Listener {
 			@Override
 			public void run() {
 				if (!(ConfigManager.getEventState() == false)) {
-					if (ConfigManager.getConfigFileConfiguration().getString("Settings.Ore." + block) == null) {
+					if (ConfigManager.YamlConfig.getString("Settings.Ore." + block) == null) {
 						return;
 					}
 					if (MiningEventManager.getOreID(block) == 0) {

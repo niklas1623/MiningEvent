@@ -13,7 +13,7 @@ import de.niklas1623.miningevent.database.MySQL;
 public class MiningEventManager {
 
 	public static void insertPlayer(String playername, String uuid) {
-		String insertPlayer = "INSERT INTO player (PlayerName, UUID) VALUES (?, ?) ON DUPLICATE KEY UPDATE PlayerName = ?";
+		String insertPlayer = "INSERT INTO player (PlayerName, UUID) VALUES (?, ?)";
 		try {
 			PreparedStatement ps_insertPlayer = MySQL.con.prepareStatement(insertPlayer);
 			ps_insertPlayer.setString(1, playername);
@@ -125,7 +125,7 @@ public class MiningEventManager {
 		return false;
 	}
 
-	public static void setPunkte(int PlayerID, int Punkte, String mat) {
+	public static void setPunkte(int PlayerID, int Punkte) {
 		String setPunkte = "INSERT INTO punkte (PlayerID, Punkte) VALUES (?, ?) ON DUPLICATE KEY UPDATE Punkte=Punkte+"
 				+ Punkte;
 		try {
@@ -189,5 +189,20 @@ public class MiningEventManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public static void updatePlayer(String playername, String uuid) {
+		String updatePlayer = "UPDATE player SET PlayerName = ? WHERE UUID = ?";
+		try {
+			PreparedStatement ps = MySQL.con.prepareStatement(updatePlayer);
+			ps.setString(1, playername);
+			ps.setString(2, uuid);
+			ps.executeUpdate();
+			ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
