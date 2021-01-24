@@ -18,7 +18,6 @@ public class MiningEventManager {
 			PreparedStatement ps_insertPlayer = MySQL.con.prepareStatement(insertPlayer);
 			ps_insertPlayer.setString(1, playername);
 			ps_insertPlayer.setString(2, uuid);
-			ps_insertPlayer.setString(3, playername);
 
 			ps_insertPlayer.executeUpdate();
 			ps_insertPlayer.close();

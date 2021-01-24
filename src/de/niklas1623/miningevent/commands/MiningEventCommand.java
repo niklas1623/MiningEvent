@@ -31,6 +31,7 @@ public class MiningEventCommand implements CommandExecutor {
 										+ " §7Nutze §e/miningevent stop §7um das Event zu stoppen!");
 							} else {
 								ConfigManager.setEventState(true);
+								ConfigManager.readConfig();
 								sender.sendMessage(Main.getInstace().prefix + " §7Das Event wurde §agestartet§7!");
 							}
 						} else {
@@ -42,6 +43,7 @@ public class MiningEventCommand implements CommandExecutor {
 											+ " §7Nutze §e/miningevent start §7um das Event zu starten!");
 								} else {
 									ConfigManager.setEventState(false);
+									ConfigManager.readConfig();
 									sender.sendMessage(Main.getInstace().prefix + " §7Das Event wurde §cgestoppt§7!");
 								}
 							} else {
