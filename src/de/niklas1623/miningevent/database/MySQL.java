@@ -22,7 +22,7 @@ public class MySQL {
 		if (!isConnected()) {
 			try {
 				con = DriverManager.getConnection(
-						"jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true&useSSL=false&AllowPublicKeyRetrieval=True&verifyServerCertificate=false",
+						"jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true&useSSL=false&AllowPublicKeyRetrieval=true",
 						username, password);
 				Bukkit.getConsoleSender().sendMessage(Main.getInstace().prefix + " MySQL Verbindung §aaufgebaut§7!");
 			} catch (SQLException ex) {
