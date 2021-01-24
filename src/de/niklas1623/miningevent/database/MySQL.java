@@ -16,13 +16,14 @@ public class MySQL {
 	public static String database;
 	public static String host;
 	public static String port;
+	public static String options;
 	public static Connection con;
 
 	public static void connect() {
 		if (!isConnected()) {
 			try {
 				con = DriverManager.getConnection(
-						"jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true&useSSL=false&AllowPublicKeyRetrieval=true",
+						"jdbc:mysql://" + host + ":" + port + "/" + database + options,
 						username, password);
 				Bukkit.getConsoleSender().sendMessage(Main.getInstace().prefix + " MySQL Verbindung §aaufgebaut§7!");
 			} catch (SQLException ex) {

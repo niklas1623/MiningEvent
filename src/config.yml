@@ -19,6 +19,7 @@ Database:
     database: miningevent
     host: localhost
     port: '3306'
+    Options: "?autoReconnect=true&useSSL=false&AllowPublicKeyRetrieval=true&verifyServerCertificate=true"
 
 
 Settings:
